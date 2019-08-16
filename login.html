@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no">
+		<title>Simple Website</title>
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/jquery-ui.css" rel="stylesheet">
+		<link href="css/style.css?2" rel="stylesheet">
+
+	
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery-ui.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+
+		
+	</head>
+  
+  
+	<body>
+		<div id="login">
+			<div class="form-signin">
+				<h2 class="form-signin-heading">Please sign in</h2>
+
+				<input id="username" type="text" class="input-block-level" placeholder="Username">
+				<input id="password" type="password" class="input-block-level" placeholder="Password">
+
+				<div id="errr-box">
+				</div>
+				<button id="btn_login" class="btn btn-large btn-primary" type="submit" onclick="onClickedSignIn();">Sign in</button>
+			</div>
+		</div>
+	</body>
+	<script>
+		$(function(){
+			
+		});
+		
+		function onClickedSignIn(){
+			var username = $('#username').val().trim();
+			var password = $('#password').val().trim();
+			if ( username.length == 0 ){
+				alert("Please type username.");
+				return;
+			}
+			
+			if ( password != 'password' ){
+				alert("Password is not correct.");
+				return;
+			}
+			
+			window.location = "index.html";
+		}
+	</script>
+</html>

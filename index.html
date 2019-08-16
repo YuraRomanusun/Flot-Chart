@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no">
+		<title>Simple Website</title>
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/jquery-ui.css" rel="stylesheet">
+		<link href="css/barchart.css" rel="stylesheet">
+		<link href="datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
+		<link href="datatables/extensions/Editor-1.7.2/css/editor.dataTables.min.css" rel="stylesheet">
+		<link href="css/style.css?2" rel="stylesheet">
+
+	
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery-ui.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/barchart.jquery.js"></script>
+		
+		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
+		<script src="datatables/extensions/Editor-1.7.2/js/dataTables.editor.min.js"></script>
+		
+		<script src="flot/jquery.flot.js"></script>
+        <script src="flot/jquery.flot.categories.js"></script>
+        <script src="flot/jquery.flot.pie.js"></script>
+        <script src="flot/jquery.flot.time.js"></script>
+        <script src="flot/jquery.flot.stack.js"></script>
+        <script src="flot/jquery.flot.resize.js"></script>
+		
+	</head>
+  
+  
+	<body>
+		
+		
+		<div class="container">
+			<div class="header">
+				<h2>Simple website</h1>
+				<h4>Edit data in the table and draw dynamic charts.
+			</div>
+			
+			<div class="input_section">
+				<h5>INPUT</h5>
+				<div class="line"></div>
+				<div class="clear"></div>
+				<div class="row">
+					<div class="col-md-6">
+						<table id="report_table" class="table table-bordered dataTable" cellpadding="0" cellspacing="0" style="min-width:100%;">
+							<thead>
+							<tr>
+								<td></td>
+								<td>Strategic Asset Allocation</td>
+								<td>ETL</td>
+								<td>ETG</td>
+							</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Equities</td><td></td><td></td><td></td>
+								</tr>
+								
+								<tr>
+									<td>Fixed Income</td><td></td><td></td><td></td>
+								</tr>
+								
+								<tr>
+									<td>Commodities</td><td></td><td></td><td></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					
+					<div class="col-md-1">
+						<table id="tilts_table" class="table table-bordered dataTable" cellpadding="0" cellspacing="0" style="min-width:100%;">
+							<thead>
+							<tr>
+								<td>Tilts</td>
+							</tr>
+							</thead>
+							<tbody>
+								<tr><td style="height:20px;"></td></tr>
+								<tr><td style="height:20px;"></td></tr>
+								<tr><td style="height:20px;"></td></tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				
+				<div class="clear"></div>
+				
+				<div class="row" style="margin-top:20px;">
+					<div class="col-xs-6">
+						<div style="width:130px;border:solid 1px black;padding:5px;">
+							<div>Tracking Error</div>
+							<div style="text-align:right;">
+								<input type="text" value="0.01" style="width:100%;text-align:right;border:none;outline:none;">
+							</div>
+						</div>
+					</div>
+					
+					
+				</div>
+				
+				<div class="row" style="margin-top:20px;">
+					<div class="col-xs-6">
+						<button class="btn btn-default" onclick="onClickedRunModel();">Run Model</button>
+					</div>
+				</div>
+			</div>
+		
+			
+			<div class="clear"></div>
+			
+			<div class="chart_section">
+				<h5>Chart</h5>
+				<div class="line"></div>
+				<div class="clear" style="height:50px;"></div>
+				<div class="row">
+					<div class="col-xs-4" style="padding-right:10px;">
+						<div style="border:solid 1px black;display:inline-block;width:100%;padding:10px 10px 49px 10px;">
+							<div style="text-align:center;font-size:20px;font-weight:bold;height:100px;">Strategic Asset Allocation</div>
+							<div class="clear"></div>
+							<div>
+								<div id="piechart1" style="width:50%;height:200px;float:left;"></div>
+								<div style="width:50%;float:right;font-size:11px;padding-top:70px;padding-left:30px;">
+									<div>
+										<label style="width:8px;height:8px;background:#4F81BD;margin-right:10px;"></label><label style="vertical-align:bottom;">Equities</label>
+									</div>
+									<div>
+										<label style="width:8px;height:8px;background:#C0504D;margin-right:10px;"></label><label style="vertical-align:bottom;">Fixed Income</label>
+									</div>
+									<div>
+										<label style="width:8px;height:8px;background:#9BBB59;margin-right:10px;"></label><label style="vertical-align:bottom;">Commodities</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					
+					<div class="col-xs-4" style="text-align:center;border:solid 1px black;padding:10px;">
+						<div style="text-align:center;font-size:20px;font-weight:bold;height:50px;">Dynamic Tilts</div>
+						<div class="clear"></div>
+						<div>
+							<div id="barchart_div" style="width:70%;float:left;">
+							</div>
+							
+							<div style="width:30%;float:right;font-size:11px;padding-top:120px;padding-left:0px;text-align:left;">
+								<div>
+									<label style="width:8px;height:8px;background:#4F81BD;margin-right:10px;"></label><label style="vertical-align:bottom;">Equities</label>
+								</div>
+								<div>
+									<label style="width:8px;height:8px;background:#C0504D;margin-right:10px;"></label><label style="vertical-align:bottom;">Fixed Income</label>
+								</div>
+								<div>
+									<label style="width:8px;height:8px;background:#9BBB59;margin-right:10px;"></label><label style="vertical-align:bottom;">Commodities</label>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-xs-4" style="padding-left:10px;">
+						<div style="border:solid 1px black;display:inline-block;width:100%;padding:10px 10px 49px 10px;">
+							<div style="text-align:center;font-size:20px;font-weight:bold;height:100px;">Final Portfolio</div>
+							<div class="clear"></div>
+							<div>
+								<div id="piechart2" style="width:50%;height:200px;float:left;"></div>
+								<div style="width:50%;float:right;font-size:11px;padding-top:70px;padding-left:30px;">
+									<div>
+										<label style="width:8px;height:8px;background:#4F81BD;margin-right:10px;"></label><label style="vertical-align:bottom;">Equities</label>
+									</div>
+									<div>
+										<label style="width:8px;height:8px;background:#C0504D;margin-right:10px;"></label><label style="vertical-align:bottom;">Fixed Income</label>
+									</div>
+									<div>
+										<label style="width:8px;height:8px;background:#9BBB59;margin-right:10px;"></label><label style="vertical-align:bottom;">Commodities</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			
+		</div>
+	</body>
+	
+	<script>
+		var dataTable = null;
+		var Editor = null;
+		var chart1 = null;
+		var chart2 = null;
+		var chart3 = null;
+		$(function(){
+			dataTable = $('#report_table').DataTable({
+				 "scrollX":true,
+				 "paging":false,
+				 "searching":false,
+				 "ordering":false,
+				 "bInfo":false,
+				 columns:[
+					{data:"columnname"},
+					{data:"sal"},
+					{data:"etl"},
+					{data:"etg"}
+				 ]
+			 });
+			
+
+			$('#tilts_table').DataTable({
+				"paging":false,
+				 "searching":false,
+				 "ordering":false,
+				 "bInfo":false,
+			});
+			Editor = new $.fn.dataTable.Editor({
+				table:"#report_table",
+				idSrc:"columnname",
+				fields:[
+					{
+						label:"Sal",
+						name:"sal",
+						type:"text",						
+					},
+					{
+						label:"Etl",
+						name:"etl",
+						type:"text",						
+					},
+					{
+						label:"Etg",
+						name:"etg",
+						type:"text",						
+					}
+				],
+				formOptions: {
+					inline: {
+						onBlur: 'submit'
+					}
+				}
+			});
+			
+			$('#report_table').on( 'click', 'tbody td', function (e) {
+				Editor.inline( this, {
+					onBlur: 'submit'
+				} );
+			});
+			
+			Editor.on( 'preSubmit', function ( e, o, action ) {
+				 if ( action == "edit"){
+					 var key = null;
+					 for(var tmp in o['data']){
+						key = tmp;
+						break;
+					 }
+
+					if ( key == null )
+						return true;
+
+					if ( o['data'][key]['sal']){
+						var sal = this.field('sal');
+						if ( $.isNumeric(o['data'][key]['sal']) == false ){
+							sal.error('Format is not correcct.');
+						}
+					}
+					
+					if ( o['data'][key]['etl']){
+						var etl = this.field('etl');
+						if ( $.isNumeric(o['data'][key]['etl']) == false ){
+							etl.error('Format is not correcct.');
+						}
+					}
+					
+					if ( o['data'][key]['etg']){
+						var etg = this.field('etg');
+						if ( $.isNumeric(o['data'][key]['etg']) == false ){
+							etg.error('Format is not correcct.');
+						}
+					}
+					
+					if ( this.inError() ){
+						return false;
+					}
+				 }
+			});
+		
+			Editor.on('submitSuccess', function(e, json, data) {
+				drawStrategicChart();
+			});
+		
+			var data = [],
+            series = 3;
+			data[2] = {label:"",data:1, color:'#9BBB59'};
+			data[1] = {label:"",data:1, color:'#C0504D'};
+			data[0] = {label:"",data:1, color:'#4F81BD'};
+			
+			chart1 = $.plot('#piechart1', data, {
+                series: {
+                    pie: { 
+                        show: true,
+                        radius: 1,
+                        label: {
+                            show: false,
+                        }
+                    }
+                },
+                legend: {
+                    show: false
+                }
+            });
+			
+			drawDynamicTiltsChart(0.2, 0.2, 0.2);
+			
+			chart3 = $.plot('#piechart2', data, {
+                series: {
+                    pie: { 
+                        show: true,
+                        radius: 1,
+                        label: {
+                            show: false,
+                        }
+                    }
+                },
+                legend: {
+                    show: false
+                }
+            });
+		
+		});
+		
+		
+		function onClickedRunModel(){
+			var equilties1 = dataTable.rows().data()[0]['sal'];
+			var fixed_income1 = dataTable.rows().data()[1]['sal'];
+			var commodities1 = dataTable.rows().data()[2]['sal'];
+			
+			var equilties2 = dataTable.rows().data()[0]['etl'];
+			var fixed_income2 = dataTable.rows().data()[1]['etl'];
+			var commodities2 = dataTable.rows().data()[2]['etl'];
+			
+			var equilties3 = dataTable.rows().data()[0]['etg'];
+			var fixed_income3 = dataTable.rows().data()[1]['etg'];
+			var commodities3 = dataTable.rows().data()[2]['etg'];
+			
+			var url = "http://example.com/api/api?e1=" + equilties1 + "&e2=" + equilties2 + "&e3=" + equilties3 + "&f1=" + fixed_income1 + "&f2=" + fixed_income2 + "&f3=" + fixed_income3 + "&c1=" + commodities1 + "&c2=" + commodities2 + "&c3=" + commodities3;
+			
+			$.ajax({
+				url: url,
+				type: "GET",				
+				processData:false,
+				contentType:false,
+				dataType:"json",
+				beforeSend:function(request){
+					/*
+					if ( api_token.length > 0 ){
+						request.setRequestHeader('api-key', api_token);	
+					}
+					*/
+				},
+				success: function(msg, status, jqXHR) {		
+					try{
+						drawDynamicTiltsChart(0.1, 0.2, 0.3);
+						drawFinalPortfolio(10, 10, 20);
+					}catch(error){	
+					}
+				},
+				complete:function(){
+				}
+			});
+		}
+		
+		function drawStrategicChart(){
+			var equilties = dataTable.rows().data()[0]['sal'];
+			var fixed_income = dataTable.rows().data()[1]['sal'];
+			var commodities = dataTable.rows().data()[2]['sal'];
+			console.log(equilties, fixed_income, commodities);
+			
+			var data = [],
+            series = 3;
+			data[2] = {label:"",data:equilties, color:'#4F81BD'};
+			data[1] = {label:"",data:fixed_income, color:'#C0504D'};
+			data[0] = {label:"",data:commodities, color:'#9BBB59'};
+			
+			chart1.setData(data);
+			chart1.draw();
+		}
+		
+		function drawDynamicTiltsChart(value1, value2, value3){
+			$('#barchart_div').empty();
+			$('#barchart_div').append('<div id="barchart" style="width:80%;float:left;"></div>');
+			
+			chart2 = $('#barchart').barChart({
+				totalSumHeight:2,
+				height:200,
+				barGap:40,
+				colors:[
+					"#C0504D","#9BBB59","#4F81BD"
+				],				
+				bars : [
+					{
+					  name : 'Dataset 1',
+					  values : [['Tilts',value2]]
+					},{
+					  name : 'Dataset 2',
+					  values : [['Tilts',value1]]
+					},{
+					  name : 'Dataset 3',
+					  values : [['Tilts',value3]]
+					}
+				]
+			});
+		}
+		
+		function drawFinalPortfolio(value1, value2, value3){
+			var data = [],
+            series = 3;
+			data[2] = {label:"",data:value1, color:'#9BBB59'};
+			data[1] = {label:"",data:value2, color:'#C0504D'};
+			data[0] = {label:"",data:value3, color:'#4F81BD'};
+			
+			chart2.setData(data);
+			chart2.draw();
+		}
+		
+		
+		function labelFormatter(label, series) {
+            return "<div style='font-size:8pt; text-align:center; padding:2px; color:white;'>" + label + "<br/>" + Math.round(series.percent) + "%</div>";
+        }
+	</script>
+</html>

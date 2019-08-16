@@ -1,0 +1,98 @@
+.clear{
+	clear: both;
+}
+
+html, body{
+	background:#F1F2F2;
+	letter-spacing:.5px;
+}
+
+
+#login{
+	padding-top:40px;
+	padding-bottom:40px;
+}
+
+#login .form-signin{
+	max-width: 300px;
+    padding: 19px 29px 29px;
+    margin: 0 auto 20px;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+
+#login .form-signin .form-signin-heading{
+	margin-bottom:10px;
+}
+
+#login .form-signin input[type="text"], #login .form-signin input[type="password"]{
+	font-size:16px;
+	height:auto;
+	margin-bottom:15px;
+	width:100%;
+	padding:7px 9px;
+	background-color:rgb(250,255,189);
+	border: 1px solid #ccc;
+	border-radius:4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    -webkit-transition: border linear .2s,box-shadow linear .2s;
+    -moz-transition: border linear .2s,box-shadow linear .2s;
+    -o-transition: border linear .2s,box-shadow linear .2s;
+    transition: border linear .2s,box-shadow linear .2s;
+}
+
+
+.header{
+	background:white;
+	margin-top:50px;
+	padding:10px 30px;
+	border-top:solid 2px #0F6186;
+}
+
+.input_section{
+	background:white;
+	margin-top:20px;
+	padding:20px 30px;
+}
+
+.input_section h5{
+	color:#E7665B;
+	float:left;
+	font-weight:bold;
+}
+
+.input_section .line{
+	width:calc(100% - 70px);
+	margin-left:70px;
+	margin-top:17px;
+	height:2px;
+	background:#F1F2F2;
+}
+
+.chart_section{
+	background:white;
+	margin-top:20px;
+	padding:20px 30px;
+}
+
+.chart_section h5{
+	color:#E7665B;
+	float:left;
+	font-weight:bold;
+}
+
+.chart_section .line{
+	width:calc(100% - 70px);
+	margin-left:70px;
+	margin-top:17px;
+	height:2px;
+	background:#F1F2F2;
+}
